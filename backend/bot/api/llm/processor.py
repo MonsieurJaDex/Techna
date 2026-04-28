@@ -1,5 +1,4 @@
-from openai import OpenAI
-from openai.types.chat import ChatCompletionMessage
+from openai import OpenAI, Omit
 
 
 class LLMProcessor:
@@ -10,20 +9,29 @@ class LLMProcessor:
         )
 
     def request(self, text: str, context: str) -> str | None:
-        return self.client.chat.completions.create(
-            model="mistral-nemo",
-            max_tokens=30000,
-            messages=[{
-                "role": "system",
-                "content": """
-               Отвечай только на основе переданного контекста из базы знаний. Не используй внешние знания и не делай предположений. Если ответа нет в контексте, скажи что не знаешь и предложи обратиться в поддержку. Формируй ответ на естественном языке строго по найденному контексту. В конце обязательно указывай источник в виде конкретного документа и пункта (например: Основание: п. X.X <название документа> и основная часть). Ничего не выдумывай и не дополняй от себя. 
-                """
-            },
-            {
-                "role": "system",
-                "content": context
-            }, {
-                "role": "user",
-                "content": text,
-            }]
-        ).choices[0].message.content
+        return (
+            self.client.chat.completions.create(
+                model="qwen3-30b-a3b",
+                max_tokens=30000,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": """
+               Отвечай только на основе переданного контекста из базы знаний. Не используй внешние знания и не делай
+                предположений. Если ответа нет в контексте, скажи что не знаешь и предложи обратиться в поддержку.
+                 Формируй ответ на естественном языке строго по найденному контексту. В конце обязательно указывай
+                  источник в виде конкретного документа и пункта (например: Основание: п. X.X <название документа> 
+                  и основная часть). Ничего не выдумывай и не дополняй от себя, относись к базе знаний как к 
+                  единственному источнику, трактуй только как написано. 
+                """,
+                    },
+                    {"role": "system", "content": context},
+                    {
+                        "role": "user",
+                        "content": text,
+                    },
+                ],
+            )
+            .choices[0]
+            .message.content
+        )

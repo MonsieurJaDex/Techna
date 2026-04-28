@@ -40,7 +40,7 @@ class QdrantEngine:
             collection_name=self.collection,
             query=query_vector,
             limit=5,
-            with_payload=True
+            with_payload=True,
         )
 
         return result

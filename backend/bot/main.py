@@ -16,6 +16,7 @@ logging.basicConfig(level=logging.INFO if config.DEBUG else logging.ERROR)
 app = FastAPI()
 app.include_router(ws_router)
 
+
 @app.post("/loadFiles")
 async def load_files(file: File, response: Response):
     try:
@@ -24,6 +25,7 @@ async def load_files(file: File, response: Response):
         response.status_code = http.HTTPStatus.BAD_REQUEST
         if isinstance(e, S3Error):
             return {"error": str(e)}
+
 
 async def main():
     await qdrant.setup()

@@ -19,6 +19,17 @@ services:
       timeout: 5s
       retries: 5
 
+  backend-auth:
+    container_name: backend-auth
+    build:
+      context: ./backend/auth
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/auth/.env
+
 volumes:
   postgres_data:
     driver: local

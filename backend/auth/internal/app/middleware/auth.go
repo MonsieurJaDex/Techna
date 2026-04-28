@@ -16,6 +16,7 @@ func AuthMiddleware(config *config.Config) gin.HandlerFunc {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 				"message": "Authorization token was not provided in request body",
 			})
+			return
 		}
 
 		claims, err := jwt.ParseToken(token, config.Secret)
@@ -23,16 +24,19 @@ func AuthMiddleware(config *config.Config) gin.HandlerFunc {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 				"message": err.Error(),
 			})
+			return
 		}
 
 		if claims == nil {
 			c.AbortWithStatus(http.StatusUnauthorized)
+			return
 		}
 
 		if claims.ExpiresAt.Unix() < time.Now().Unix() {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 				"message": "access token expired",
 			})
+			return
 		}
 
 		c.Set("claims", claims)

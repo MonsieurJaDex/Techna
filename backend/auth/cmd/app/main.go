@@ -46,7 +46,8 @@ func main() {
 	router.GET("/", apiRoutes.Index)
 
 	// auth endpoints handling
-	authRouter.GET("/signin", authRoutes.SignIn)
+	authRouter.POST("/signin", authRoutes.SignIn)
+	authRouter.POST("/auth", authRoutes.GetNewAccessToken)
 
 	securedRouter.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{

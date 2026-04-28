@@ -1,4 +1,4 @@
-from openai import OpenAI, Omit
+from openai import OpenAI
 
 
 class LLMProcessor:

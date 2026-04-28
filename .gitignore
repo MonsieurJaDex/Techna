@@ -34,8 +34,13 @@ yarn-error.*
 .env
 .env*.local
 
-# IDE
+# Editor/IDE
+# .idea/
+# .vscode/
 .vscode/
+
+# docker volumes
+volumes/*
 
 # typescript
 *.tsbuildinfo

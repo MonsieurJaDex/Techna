@@ -49,11 +49,17 @@ func main() {
 	authRouter.POST("/signin", authRoutes.SignIn)
 	authRouter.POST("/auth", authRoutes.GetNewAccessToken)
 
-	securedRouter.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Authorized",
-		})
-	})
+// 	securedRouter.GET("/info", func(c *gin.Context) {
+// 		// val, _ := c.Get("claims")
+//
+// 		// claims, _ := val.(*types.JwtClaims)
+//
+// 		// employee, err :=
+//
+// 		// c.JSON(http.StatusOK, gin.H{
+// 		// 	"first_name": claims.Payload.Email
+// 		// })
+// 	})
 
 	logrus.Info("Starting up server at ", fmt.Sprintf("%s:%d", config.HostAddr, config.HostPort))
 	router.Run(fmt.Sprintf("%s:%d", config.HostAddr, config.HostPort))

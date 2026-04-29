@@ -6,10 +6,10 @@ import uvicorn
 from fastapi import FastAPI, Response
 from minio import S3Error
 
-from backend.bot.config import config
-from backend.bot.handlers import ws_router
-from backend.bot.constants import qdrant, s3_manager
-from backend.bot.models import File
+from config import (config)
+from handlers import ws_router
+from constants import qdrant, s3_manager
+from models import File
 
 logging.basicConfig(level=logging.INFO if config.DEBUG else logging.ERROR)
 
@@ -36,5 +36,5 @@ if __name__ == "__main__":
     asyncio.run(main())
 
     uvicorn.run(
-        app, host="127.0.0.1", port=8000, log_level="info" if config.DEBUG else "error"
+        app, host="0.0.0.0", port=8000, log_level="info" if config.DEBUG else "error"
     )

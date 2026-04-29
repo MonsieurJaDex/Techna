@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-from backend.bot.formatters import TextFormatter
+from formatters import TextFormatter
 
 
 class EmbeddingProcessor:

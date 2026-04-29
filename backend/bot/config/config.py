@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-# app configuration object definition
+# bot configuration object definition
 class AppConfig(BaseSettings):
 
     DEBUG: bool = False

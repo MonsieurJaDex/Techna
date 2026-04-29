@@ -3,9 +3,9 @@ import sys
 
 from minio import Minio
 
-from backend.bot.api.embeddings.processor import EmbeddingProcessor
-from backend.bot.formatters import TextFormatter
-from backend.bot.qdrant.engine import QdrantEngine
+from api.embeddings.processor import EmbeddingProcessor
+from formatters import TextFormatter
+from qdrant.engine import QdrantEngine
 
 
 class S3Manager:

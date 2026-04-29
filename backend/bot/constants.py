@@ -1,8 +1,8 @@
-from backend.bot.config import config
-from backend.bot.qdrant.engine import QdrantEngine
-from backend.bot.s3 import S3Manager
+from config import config
+from qdrant.engine import QdrantEngine
+from s3 import S3Manager
 
-qdrant = QdrantEngine("127.0.0.1", 6333, "files")
+qdrant = QdrantEngine("qdrant", 6333, "files")
 
 s3_manager = S3Manager(
     access_key=config.S3_ACCESS_KEY,
